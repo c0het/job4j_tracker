@@ -8,8 +8,8 @@ public class Calculator {
         return y - x;
     }
 
-    public int sumAllOperatinon(int y, int z, int f) {
-    return y + z + f + x;
+    public int sumAllOperatinon(int y) {
+    return minus(y) + divide(y) + sum(y);
     }
 
     public int divide(int y) {
@@ -26,8 +26,6 @@ public class Calculator {
         System.out.println(Calculator.minus(10));
         Calculator calculator = new Calculator();
         System.out.println(calculator.divide(10));
-        Calculator calculator1 = new Calculator();
-        System.out.println(calculator1.sumAllOperatinon(Calculator.minus(10),
-                Calculator.sum(10), calculator.divide(10)));
+        System.out.println(calculator.sumAllOperatinon(10));
     }
 }
