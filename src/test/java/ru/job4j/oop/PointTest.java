@@ -41,4 +41,14 @@ public class PointTest {
         double out = point.distance(point1);
         Assert.assertEquals(expected, out, 0.01);
     }
+
+    @Test
+    public void when005to500then7dot07() {
+        double expected = 7.07;
+        Point point = new Point(0, 0, 5);
+        Point point1 = new Point(5, 0, 0);
+        double out = point.distance3d(point1);
+        Assert.assertEquals(expected, out, 0.01);
+    }
+
 }
