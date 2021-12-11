@@ -14,21 +14,20 @@ public class Library {
         books[3] = book4;
         for (int index = 0; index < books.length; index++) {
             Book book =  books[index];
-            System.out.println("Название книги - " + book.nameOfBook + ", страниц в книге - " + book.numberOfPages);
+            System.out.println("Название книги - " + book.getNameOfBook() + ", страниц в книге - " + book.getNumberOfPages());
         }
         System.out.println("Replace 0 to 3");
         books[3] = books[0];
         books[0] = book4;
         for (int index = 0; index < books.length; index++) {
             Book book = books[index];
-            System.out.println("Название книги - " + book.nameOfBook + ", страниц в книге - " + book.numberOfPages);
+            System.out.println("Название книги - " + book.getNameOfBook() + ", страниц в книге - " + book.getNumberOfPages());
         }
         System.out.println("Only \"Clean code\"");
         for (int inedex = 0; inedex < books.length; inedex++) {
             Book book = books[inedex];
-            if (book.nameOfBook.equals("Clean code")) {
-                System.out.println("Название книги - " + book.nameOfBook + ", страниц в книге - " + book.numberOfPages);
-                break;
+            if ("Clean code".equals(book.getNameOfBook())) {
+                System.out.println("Название книги - " + book.getNameOfBook() + ", страниц в книге - " + book.getNumberOfPages());
             }
         }
     }

@@ -1,8 +1,8 @@
 package ru.job4j.pojo;
 
 public class Book {
-    String nameOfBook;
-    int numberOfPages;
+    private String nameOfBook;
+    private int numberOfPages;
 
     public String getNameOfBook() {
         return nameOfBook;
