@@ -13,7 +13,7 @@ public class Library {
         books[2] = book3;
         books[3] = book4;
         for (int index = 0; index < books.length; index++) {
-            Book book = books[index];
+            Book book =  books[index];
             System.out.println("Название книги - " + book.nameOfBook + ", страниц в книге - " + book.numberOfPages);
         }
         System.out.println("Replace 0 to 3");
