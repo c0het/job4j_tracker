@@ -18,7 +18,7 @@ public class StartUI {
                 tracker.add(item);
                 System.out.println("Добавленная заявка " + item);
             } else if (select == 6) {
-                run = false;
+                run =  false;
             }
         }
     }
