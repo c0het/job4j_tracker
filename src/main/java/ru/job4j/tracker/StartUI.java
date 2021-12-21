@@ -14,7 +14,7 @@ public class StartUI {
         System.out.println("===Show all items===");
         Item[] items = tracker.findAll();
         if (items.length > 0) {
-            for (Item item : items) {
+            for (Item item : items)  {
                 System.out.println(item);
             }
         } else {
