@@ -4,7 +4,7 @@ public class CreateAction implements UserAction {
     private final Output output;
 
     public CreateAction(Output output) {
-        this.output = output;
+        this.output =  output;
     }
 
     @Override

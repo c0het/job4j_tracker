@@ -4,7 +4,7 @@ public class EditAction implements UserAction {
     private final Output output;
 
     public EditAction(Output output) {
-        this.output = output;
+        this.output =  output;
     }
 
     public String name() {

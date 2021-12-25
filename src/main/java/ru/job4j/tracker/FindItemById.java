@@ -4,7 +4,7 @@ public class FindItemById implements UserAction {
     private final Output output;
 
     public FindItemById(Output output) {
-        this.output = output;
+        this.output =  output;
     }
 
     public String name() {

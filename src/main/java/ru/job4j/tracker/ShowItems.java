@@ -4,7 +4,7 @@ public class ShowItems implements UserAction {
     private final Output output;
 
     public ShowItems(Output output) {
-        this.output = output;
+        this.output =  output;
     }
 
     public String name() {

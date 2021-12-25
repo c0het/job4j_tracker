@@ -4,7 +4,7 @@ public class DeleteItem implements UserAction {
     private final Output output;
 
     public DeleteItem(Output output) {
-        this.output = output;
+        this.output =  output;
     }
 
     public String name() {
