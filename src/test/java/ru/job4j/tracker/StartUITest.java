@@ -37,7 +37,7 @@ public class StartUITest {
                 new EditAction(),
                 new CloseAction()
         };
-        new StartUI(output).init(in, tracker, actions);
+        new StartUI(output).init(in, tracker,  actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
 
