@@ -7,8 +7,8 @@ public class Fact {
     }
 
     public int calc(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException("Number is must be positive");
+        if (n < 0) {
+            throw new IllegalArgumentException("The number must not be negative or equal to zero.");
         }
         int rsl = 1;
         for (int index = 1; index <= n; index++) {
