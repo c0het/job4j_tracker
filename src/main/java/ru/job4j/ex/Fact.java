@@ -7,7 +7,7 @@ public class Fact {
     }
 
     public int calc(int n) {
-        if (n <= 0) {
+        if (n < 1) {
             throw new IllegalArgumentException("Number is must be positive");
         }
         int rsl = 1;
