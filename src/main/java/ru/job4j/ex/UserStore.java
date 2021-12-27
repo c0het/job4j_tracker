@@ -17,10 +17,10 @@ public class UserStore {
         }
 
         public static boolean validate(User user) throws UserInvalidException {
-            if (user.isValid() && user.getUsername().length() < 3) {
-                throw new UserInvalidException("This user is not valid.");
+            if (user.isValid() && user.getUsername().length() > 3) {
+                return true;
             }
-            return true;
+            throw new UserInvalidException("This user is not valid.");
         }
 
         public static void main(String[] args) {
