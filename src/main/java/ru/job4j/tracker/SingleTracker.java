@@ -13,12 +13,4 @@ public final class SingleTracker {
         }
         return tracker;
     }
-
-    public Item add(Item item) {
-        return tracker.add(item);
-    }
-
-    public Item findById(int id) {
-        return null;
-    }
 }
