@@ -2,6 +2,10 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -15,12 +19,12 @@ public class StartUITest {
                 new String[] {"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new CreateAction(output),
                 new CloseAction(output)
-        };
+        ));
         new StartUI(output).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
@@ -33,10 +37,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", id, replacedName, "1"}
         );
-        UserAction[] actions = {
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new EditAction(output),
                 new CloseAction(output)
-        };
+        ));
         new StartUI(output).init(in, tracker,  actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
@@ -50,10 +54,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", id, "1"}
         );
-        UserAction[] actions = {
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new DeleteItem(output),
                 new CloseAction(output)
-        };
+        ));
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
@@ -65,9 +69,8 @@ public class StartUITest {
                 new String[] {"0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new CloseAction(output)
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new CloseAction(output));
         new StartUI(output).init(in, tracker, actions);
         assertThat(output.toString(), is(
                 "Menu:" + System.lineSeparator()
@@ -84,10 +87,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
         );
-        UserAction[] actions = new UserAction[]{
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new EditAction(out),
                 new CloseAction(out)
-        };
+        ));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
@@ -111,10 +114,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "1"}
         );
-        UserAction[] actions = new UserAction[] {
+        List<UserAction> actions = new ArrayList<>(Arrays.asList(
                 new ShowItems(output),
                 new CloseAction(output)
-        };
+        ));
         new StartUI(output).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -138,10 +141,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test1", "1"}
         );
-        UserAction[] action = new UserAction[] {
+        List<UserAction> action = new ArrayList<>(Arrays.asList(
                 new FindItemByName(output),
                 new CloseAction(output)
-        };
+        ));
         new StartUI(output).init(in, tracker, action);
         String ln = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -164,10 +167,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(one.getId()), "1"}
         );
-        UserAction[] action = new UserAction[] {
+        List<UserAction> action = new ArrayList<>(Arrays.asList(
                 new FindItemById(output),
-                new CloseAction(output),
-        };
+                new CloseAction(output)
+        ));
         String ln = System.lineSeparator();
         new StartUI(output).init(in, tracker, action);
         assertThat(output.toString(), is(
@@ -189,9 +192,8 @@ public class StartUITest {
                 new String[] {"8", "0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = new UserAction[]{
-                new CloseAction(out)
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new CloseAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
@@ -204,51 +206,4 @@ public class StartUITest {
         );
     }
 
-        @Test
-        public void whenInvalidInput() {
-            Output out = new StubOutput();
-            Input in = new StubInput(
-                    new String[] {"one", "1"}
-            );
-            ValidateInput input = new ValidateInput(out, in);
-            int selected = input.askInt("Enter menu:");
-            assertThat(selected, is(1));
-        }
-
-    @Test
-    public void whenValidInput() {
-        Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"1"}
-        );
-        ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(1));
-    }
-
-    @Test
-    public void whenSomeValidInput() {
-        Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"1", "2", "3"}
-        );
-        ValidateInput input = new ValidateInput(out, in);
-        int selected1 = input.askInt("Enter menu:");
-        assertThat(selected1, is(1));
-        int selected2 = input.askInt("Enter menu:");
-        assertThat(selected2, is(2));
-        int selected3 = input.askInt("Enter menu:");
-        assertThat(selected3, is(3));
-    }
-
-    @Test
-    public void whenNegNumber() {
-        Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"-1"}
-        );
-        ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(-1));
-    }
 }
