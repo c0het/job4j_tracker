@@ -49,7 +49,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            item.setId(index);
+            item.setId(id);
             items.set(index, item);
         }
         return rsl;
@@ -59,7 +59,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            this.items.remove(id);
+            this.items.remove(index);
         }
         return rsl;
     }
