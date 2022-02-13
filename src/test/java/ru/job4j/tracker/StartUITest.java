@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     @Test
-    public void whenCreateItem() {
+    public void whenCreateItem()  {
         Output output = new StubOutput();
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}

@@ -60,7 +60,7 @@ public class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             this.items.remove(index);
-        }
+         }
         return rsl;
     }
 }
