@@ -19,10 +19,10 @@ public class StartUITest {
                 new String[] {"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = Arrays.asList(
                 new CreateAction(output),
                 new CloseAction(output)
-        ));
+        );
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
@@ -37,10 +37,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", id, replacedName, "1"}
         );
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = Arrays.asList(
                 new EditAction(output),
                 new CloseAction(output)
-        ));
+        );
         new StartUI(output).init(in, tracker,  actions);
         assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
     }
@@ -54,10 +54,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", id, "1"}
         );
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = Arrays.asList(
                 new DeleteItem(output),
                 new CloseAction(output)
-        ));
+        );
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
@@ -87,10 +87,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
         );
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = Arrays.asList(
                 new EditAction(out),
                 new CloseAction(out)
-        ));
+        );
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString(), is(
@@ -114,10 +114,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "1"}
         );
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(
+        List<UserAction> actions = Arrays.asList(
                 new ShowItems(output),
                 new CloseAction(output)
-        ));
+        );
         new StartUI(output).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -141,10 +141,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test1", "1"}
         );
-        List<UserAction> action = new ArrayList<>(Arrays.asList(
+        List<UserAction> action = Arrays.asList(
                 new FindItemByName(output),
                 new CloseAction(output)
-        ));
+        );
         new StartUI(output).init(in, tracker, action);
         String ln = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -167,10 +167,10 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(one.getId()), "1"}
         );
-        List<UserAction> action = new ArrayList<>(Arrays.asList(
+        List<UserAction> action = Arrays.asList(
                 new FindItemById(output),
                 new CloseAction(output)
-        ));
+        );
         String ln = System.lineSeparator();
         new StartUI(output).init(in, tracker, action);
         assertThat(output.toString(), is(
