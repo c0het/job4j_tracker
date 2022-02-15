@@ -9,15 +9,12 @@ public class UniqueText {
         String[] origin = originText.split(" ");
         String[] text = duplicateText.split(" ");
         HashSet<String> check = new HashSet<>(Arrays.asList(origin));
-        int clone = 0;
-        int notClone = 0;
         for (String s : text) {
-            if (check.contains(s)) {
-                clone++;
-            } else {
-                notClone++;
+            if (!check.contains(s)) {
+            rsl = false;
+            break;
             }
-            rsl = clone >= notClone;
+
         }
         return rsl;
     }
