@@ -25,7 +25,7 @@ public class BankServiceTest {
     }
 
     @Test
-    public void addAccount() {
+    public void addAccount()  {
         User user = new User("3434", "Petr Arsentev");
         BankService bank = new BankService();
         bank.addUser(user);
