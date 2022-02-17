@@ -17,7 +17,9 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +  "number='" + number + '\'' +  ", name='" + name + '\'' +  '}';
+        return "Order{" +  "number='"
+                + number + '\'' +  ", name='"
+                + name + '\'' +  '}';
     }
 
     @Override
