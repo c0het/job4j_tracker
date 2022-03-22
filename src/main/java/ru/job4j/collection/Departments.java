@@ -7,9 +7,9 @@ public class Departments {
     public static List<String> fillGaps(List<String> deps) {
         Set<String> setRsl = new LinkedHashSet<>();
         for (String value : deps) {
-            String start = null;
+            String start = "";
             for (String el : value.split("/")) {
-                if (start == null) {
+                if (start == "") {
                 setRsl.add(el);
                 start = el;
                 } else {
