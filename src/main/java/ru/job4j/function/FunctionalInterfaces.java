@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.*;
 
 public class FunctionalInterfaces {
-    @SuppressWarnings("checkstyle:NoWhitespaceBefore")
+
     public static void main(String[] args) {
         Map<Integer, String> map = new HashMap<>();
         BiConsumer<Integer, String> biCon = (s, s1) -> map.put(s, s1);
