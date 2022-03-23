@@ -19,9 +19,9 @@ public class FunctionalInterfaces {
         biCon.accept(6, "six");
         biCon.accept(7, "seven");
 
-        BiPredicate<Integer, String> biPred = (s, s1) -> map.get(s).length() == Integer.parseInt(s1);
+        BiPredicate<Integer, String> biPred = (s, s1) -> s % 2 == 0 || map.get(s).length() == Integer.parseInt(s1);
         for (Integer i : map.keySet()) {
-            if (i % 2 == 0 || biPred.test(i, "4")) {
+            if (biPred.test(i, "4")) {
                 System.out.println("key: " + i + " value: " + map.get(i));
             }
         }
