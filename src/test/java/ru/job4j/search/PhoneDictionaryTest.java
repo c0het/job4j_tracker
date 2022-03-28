@@ -14,7 +14,7 @@ public class PhoneDictionaryTest {
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
         ArrayList<Person> persons = phones.find("Petr");
-        assertThat(persons.get(0).getSurname(), is("Arsentev"));
+        assertThat(persons.get(0).getSurname(),  is("Arsentev"));
     }
 
     @Test
