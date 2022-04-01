@@ -16,10 +16,8 @@ public class Card {
     }
 
     public static void main(String[] args) {
-        Value[] values = {Value.V_6, Value.V_7, Value.V_8};
-        Suit[] suits = {Suit.Clubs, Suit.Diamonds, Suit.Spades, Suit.Hearts};
-        Stream.of(values)
-                .flatMap(value -> Stream.of(suits)
+        Stream.of(Value.values())
+                .flatMap(value -> Stream.of(Suit.values())
                         .map(suit1 -> new Card(suit1, value)))
                 .collect(Collectors.toList()).forEach(System.out::println);
     }
