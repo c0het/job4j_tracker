@@ -32,6 +32,7 @@ public class Subject {
         return Objects.equals(name, subject.name);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(name);
