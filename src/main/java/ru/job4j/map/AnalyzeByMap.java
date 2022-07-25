@@ -38,11 +38,9 @@ public class AnalyzeByMap {
         LinkedHashMap<String, Double> scoreBySub = new LinkedHashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                if (!scoreBySub.containsKey(subject.getName())) {
-                    scoreBySub.put(subject.getName(), subject.getScore());
-                } else {
-                    scoreBySub.put(subject.getName(), scoreBySub.get(subject.getName()) + subject.getScore());
-                }
+               if(scoreBySub.putIfAbsent(subject.getName(), subject.getScore()) == null) {
+                   scoreBySub.computeIfPresent(subject.getName(), (k, v) -> v + subject.getScore());
+               }
             }
         }
         for (String key : scoreBySub.keySet() ) {
