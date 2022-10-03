@@ -72,6 +72,7 @@ public class SqlTracker implements Store, AutoCloseable {
             preparedStatement.setString(1, item.getName());
             preparedStatement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             preparedStatement.setInt(3, id);
+            item.setId(id);
             rsl = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOG.debug(e);
