@@ -10,9 +10,8 @@ import org.apache.log4j.Logger;
 
 public class SqlTracker implements Store, AutoCloseable {
 
-    private Connection cn;
-
     private static final Logger LOG = LogManager.getLogger(UsageLog4j.class.getName());
+    private Connection cn;
 
     public SqlTracker(Connection connection) {
         this.cn = connection;
@@ -47,32 +46,31 @@ public class SqlTracker implements Store, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-       try(PreparedStatement preparedStatement =
-                   cn.prepareStatement
-                           ("INSERT INTO items(name, created) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
-           preparedStatement.setString(1, item.getName());
-           preparedStatement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
-           preparedStatement.execute();
-           try (ResultSet keyGen = preparedStatement.getGeneratedKeys()) {
-               if (keyGen.next()) {
-                   item.setId(keyGen.getInt(1));
-               }
-           }
-       } catch (SQLException e) {
-           LOG.debug(e);
-       }
-       return item;
+        try (PreparedStatement preparedStatement =
+                     cn.prepareStatement
+                             ("INSERT INTO items(name, created) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, item.getName());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
+            preparedStatement.execute();
+            try (ResultSet keyGen = preparedStatement.getGeneratedKeys()) {
+                if (keyGen.next()) {
+                    item.setId(keyGen.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.debug(e);
+        }
+        return item;
     }
 
     @Override
     public boolean replace(int id, Item item) {
         boolean rsl = false;
         try (PreparedStatement preparedStatement =
-                     cn.prepareStatement("UPDATE items SET name = ?, created = ? WHERE id = ?")){
+                     cn.prepareStatement("UPDATE items SET name = ?, created = ? WHERE id = ?")) {
             preparedStatement.setString(1, item.getName());
             preparedStatement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             preparedStatement.setInt(3, id);
-            item.setId(id);
             rsl = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOG.debug(e);
@@ -84,7 +82,7 @@ public class SqlTracker implements Store, AutoCloseable {
     public boolean delete(int id) {
         boolean rsl = false;
         try (PreparedStatement preparedStatement =
-                     cn.prepareStatement("DELETE FROM items WHERE id = ?")){
+                     cn.prepareStatement("DELETE FROM items WHERE id = ?")) {
             preparedStatement.setInt(1, id);
             rsl = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -96,7 +94,7 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findAll() {
         List<Item> rsl = new ArrayList<>();
-        try(Statement st = cn.createStatement()) {
+        try (Statement st = cn.createStatement()) {
             ResultSet resultSet = st.executeQuery("SELECT * FROM items");
             while (resultSet.next()) {
                 rsl.add(createNewItemFromDB(resultSet));
@@ -123,16 +121,14 @@ public class SqlTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public Item findById(int id)  {
-        Item rsl = new Item();
+    public Item findById(int id) {
+        Item rsl = null;
         try (PreparedStatement preparedStatement = cn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             if (resultSet.getInt(1) == id) {
                 rsl = createNewItemFromDB(resultSet);
-            } else {
-                rsl = null;
             }
         } catch (SQLException e) {
             LOG.debug(e);
@@ -140,16 +136,8 @@ public class SqlTracker implements Store, AutoCloseable {
         return rsl;
     }
 
-    public Item createNewItemFromDB(ResultSet resultSet) {
-        Item rsl = null;
-        try {
-            rsl =  new Item(resultSet.getInt(1), resultSet.getString(2),
-                    resultSet.getTimestamp(3).toLocalDateTime());
-        } catch (SQLException e) {
-            LOG.debug(e);
-        }
-        return rsl;
+    public Item createNewItemFromDB(ResultSet resultSet) throws SQLException {
+        return new Item(resultSet.getInt(1), resultSet.getString(2),
+                resultSet.getTimestamp(3).toLocalDateTime());
     }
-
-
 }
