@@ -126,8 +126,7 @@ public class SqlTracker implements Store, AutoCloseable {
         try (PreparedStatement preparedStatement = cn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            if (resultSet.getInt(1) == id) {
+            if (resultSet.next()) {
                 rsl = createNewItemFromDB(resultSet);
             }
         } catch (SQLException e) {
