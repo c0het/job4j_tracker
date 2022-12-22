@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreateSomeItems implements UserAction{
 
     private final Output output;
@@ -18,15 +21,10 @@ public class CreateSomeItems implements UserAction{
     public boolean execute(Input input, Store store) {
         output.println("=== Create some new Items ===");
         int amountItems = input.askInt("Enter amount items: ");
-        Item[] items = new Item[amountItems];
-        String name;
+        List<Item> items = new ArrayList<>();
+        String name = "name";
         for (int i = 0; i < amountItems; i++) {
-            name = input.askStr("Enter name: ");
-            items[i] = new Item(name);
-        }
-        for (int i = 0; i < amountItems; i++) {
-            store.add(items[i]);
-            output.println("Добавленная заявка " + items[i]);
+            items.add(new Item(name + i));
         }
         return true;
     }
